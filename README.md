@@ -1,6 +1,7 @@
 # Improving Diffusion-Based Generative Models via Approximated Optimal Transport \(EDM-AOT\)
 ![Teaser image](https://github.com/large-scale-kim/EDM-AOT/blob/main/docs/tangent_edm.png)
 ![Teaser image](https://github.com/large-scale-kim/EDM-AOT/blob/main/docs/tanget_aot.png)
+
 **Improving Diffusion-Based Generative Models via Approximated Optimal Transport**<br>
 Daegyu Kim, Uiwon Hwang, Jooyoung Choi, Chaehun Shin, Sungroh Yoon
 
