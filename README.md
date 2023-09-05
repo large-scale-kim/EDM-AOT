@@ -32,7 +32,7 @@ torchrun --nproc_per_node=1 --standalone generate.py --network NDEWORK_DIR --see
 
 You can train EDM-based diffuion models with our AOT using [train.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/train.py).
 
-We edit [loss.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/training/loss.py) and [training_loop.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/training/training_loop.py) for AOT techniques.
+We edit [loss.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/training/loss.py) and [training_loop.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/training/training_loop.py) for our AOT techniques.
 ```.bash
 torchrun --standalone --nproc_per_node=4 train.py --outdir OUTPUT_DIR  --data DATASET  --cond 0 --arch ncsnpp \
         --batch-gpu 32 --batch 128  --large_batch 512
