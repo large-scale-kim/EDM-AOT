@@ -42,5 +42,5 @@ To measure the FID score of sampled images, run [fid.py](https://github.com/larg
 ```.bash
 python fid.py calc --ref DATASET_npz --images OUTPUT_DIR
 ```
-To prepare datasets for training and evaluation, refer [EDM](https://github.com/NVlabs/edm).
+To prepare datasets for training and evaluation, refer 'Preparing datasets' section of [EDM](https://github.com/NVlabs/edm).
 
