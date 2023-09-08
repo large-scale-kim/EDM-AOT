@@ -84,7 +84,7 @@ def training_loop(
 
     # Setup optimizer.
     dist.print0('Setting up optimizer...')
-    loss_fn = dnnlib.util.construct_class_by_name(**loss_kwargs) # training.loss.(VP|VE|EDM)Loss
+    loss_fn = dnnlib.util.construct_class_by_name(**loss_kwargs, batch = batch_gpu) # training.loss.(VP|VE|EDM)Loss
     optimizer = dnnlib.util.construct_class_by_name(params=net.parameters(), **optimizer_kwargs) # subclass of torch.optim.Optimizer
     augment_pipe = dnnlib.util.construct_class_by_name(**augment_kwargs) if augment_kwargs is not None else None # training.augment.AugmentPipe
     ddp = torch.nn.parallel.DistributedDataParallel(net, device_ids=[device], broadcast_buffers=False)
