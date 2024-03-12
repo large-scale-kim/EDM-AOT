@@ -24,7 +24,7 @@ conda activate edm
 ```
 # Pre-trained model
 
-You can download our pre-trained [unconditoinal](https://drive.google.com/file/d/1y-79-IKw15BaCHJRznC8fUKQ9lQR2I_M/view?usp=sharing) and [conditional](https://drive.google.com/file/d/1KOSnBal7Mf1wVLwOiKgOachxcwfsDmum/view?usp=sharing} models.
+You can download our pre-trained [unconditoinal](https://drive.google.com/file/d/1y-79-IKw15BaCHJRznC8fUKQ9lQR2I_M/view?usp=sharing) and [conditional](https://drive.google.com/file/d/1KOSnBal7Mf1wVLwOiKgOachxcwfsDmum/view?usp=sharing) models.
 
 To generate images using our model, run [generate.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/generate.py).
 ```.bash
