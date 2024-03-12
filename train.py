@@ -77,7 +77,7 @@ def parse_int_list(s):
 @click.option('--resume',        help='Resume from previous training state', metavar='PT',          type=str)
 @click.option('-n', '--dry-run', help='Print training options and exit',                            is_flag=True)
 
-@click.option('--large_batch',         help='Total batch size', metavar='INT',                            type=click.IntRange(min=1), default=512, show_default=True)
+@click.option('--aot',         help='Total batch size for AOT technique', metavar='INT',                            type=click.IntRange(min=1), default=512, show_default=True)
 
 def main(**kwargs):
     """Train diffusion-based generative model using the techniques described in the
@@ -101,7 +101,7 @@ def main(**kwargs):
     c.network_kwargs = dnnlib.EasyDict()
     c.loss_kwargs = dnnlib.EasyDict()
     c.optimizer_kwargs = dnnlib.EasyDict(class_name='torch.optim.Adam', lr=opts.lr, betas=[0.9,0.999], eps=1e-8)
-    c.large = opts.large_batch
+    c.large=opts.aot
     # Validate dataset options.
     try:
         dataset_obj = dnnlib.util.construct_class_by_name(**c.dataset_kwargs)
