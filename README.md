@@ -3,14 +3,14 @@
 ![Teaser image](https://github.com/large-scale-kim/EDM-AOT/blob/main/docs/tanget_aot.png)
 
 **Improving Diffusion-Based Generative Models via Approximated Optimal Transport**<br>
-Daegyu Kim, Uiwon Hwang, Jooyoung Choi, Chaehun Shin, Sungroh Yoon
+Daegyu Kim,  Jooyoung Choi, Chaehun Shin, Uiwon Hwang, Sungroh Yoon
 
 [arXiv](https://arxiv.org/abs/2403.05069)
 
 **Abstract**
 ###### *We introduce the Approximated Optimal Transport (AOT) technique, a novel training scheme for diffusion-based generative models. Our approach aims to approximate and integrate optimal transport into the training process, significantly enhancing the ability of diffusion models to estimate the denoiser outputs accurately. This improvement leads to ODE trajectories of diffusion models with lower curvature and reduced truncation errors during sampling. We achieve superior image quality and reduced sampling steps by employing AOT in training. Specifically, we achieve FID scores of 1.88 with just 27 NFEs and 1.73 with 29 NFEs in unconditional and conditional generations, respectively. Furthermore, when applying AOT to train the discriminator for guidance, we establish new state-of-the-art FID scores of 1.68 and 1.58 for unconditional and conditional generations, respectively, each with 29 NFEs. This outcome demonstrates the effectiveness of AOT in enhancing the performance of diffusion models.*
 
-This is implementation code of [Improving Diffusion-Based Generative Models via Approximated Optimal Transport]().
+This is implementation code of [Improving Diffusion-Based Generative Models via Approximated Optimal Transport](https://arxiv.org/abs/2403.05069).
 
 This code is based on [EDM](https://github.com/NVlabs/edm).
 
