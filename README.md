@@ -5,7 +5,7 @@
 **Improving Diffusion-Based Generative Models via Approximated Optimal Transport**<br>
 Daegyu Kim, Uiwon Hwang, Jooyoung Choi, Chaehun Shin, Sungroh Yoon
 
-[arXiv]()
+[arXiv](https://arxiv.org/abs/2403.05069)
 
 **Abstract**
 ###### *Recent studies have explored the application of Optimal Transport to ODE-based image generative models. These approaches enhance generative models by identifying the Optimal Transport connections between image and noise distributions. However, applying these approaches to diffusion-based generative models introduces computational efficiency issues, making their application challenging. Therefore, simulation-free models, such as Flow Matching, are the only viable option for implementing these approaches. To tackle this limitation, we propose the Approximated Optimal Transport (AOT) for diffusion-based generative models, which effectively estimates the Optimal Transport process. We make two primary contributions. Firstly, we illustrate the viability of obtaining AOT through mini-batch coupling. Secondly, we enhance the training of diffusion models by incorporating AOT, resulting in improved model performance. Notably, our method achieves state-of-the-art results in unconditional image generation on the CIFAR-10 dataset without requiring guidance models, obtaining a FID score of 1.88 with 27 NFE (the number of function evaluations). Additionally, we extend the application of AOT to the training of discriminator guidance models, leading to a new benchmark for unconditional image generation on the CIFAR-10 dataset utilizing guidance models with a remarkable FID score of 1.67 with 29 NFE.*
