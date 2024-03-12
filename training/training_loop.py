@@ -19,6 +19,7 @@ import dnnlib
 from torch_utils import distributed as dist
 from torch_utils import training_stats
 from torch_utils import misc
+from training.loss import assignment_problem_label, assignment_problem
 
 #----------------------------------------------------------------------------
 
@@ -119,16 +120,40 @@ def training_loop(
     maintenance_time = tick_start_time - start_time
     dist.update_progress(cur_nimg // 1000, total_kimg)
     stats_jsonl = None
+    count_max = large // batch_gpu
+    count = count_max
+    if  dataset_kwargs.use_labels:
+        aot_fn = assignment_problem_label
+    else:
+        aot_fn = assignment_problem
     while True:
+        if count == count_max :
+
+            count = 0
+            images, labels = next(dataset_iterator)
+            images = images.to(device).to(torch.float32) / 127.5 - 1
+            labels = labels.to(device)
+            with torch.no_grad():
+                y_cond, aug_cond = augment_pipe(images) if augment_pipe is not None else (images, None)
+                n_cond = torch.randn_like(y_cond)
+                n_cond = aot_fn(n_cond,y_cond,labels)
+
+
 
         # Accumulate gradients.
         optimizer.zero_grad(set_to_none=True)
         for round_idx in range(num_accumulation_rounds):
             with misc.ddp_sync(ddp, (round_idx == num_accumulation_rounds - 1)):
-                images, labels = next(dataset_iterator)
-                images = images.to(device).to(torch.float32) / 127.5 - 1
-                labels = labels.to(device)
-                loss = loss_fn(net=ddp, images=images, labels=labels, augment_pipe=augment_pipe)
+                #images, labels = next(dataset_iterator)
+                #images = images.to(device).to(torch.float32) / 127.5 - 1
+                #labels = labels.to(device)
+                img_train = y_cond[count * batch_gpu: (count+1) * batch_gpu, : ,:,:]
+                lab_train = labels[count * batch_gpu: (count+1) * batch_gpu, :]
+                noise_train = n_cond[count * batch_gpu: (count+1) * batch_gpu, : ,:,:]
+                aug_train = aug_cond[count * batch_gpu: (count+1) * batch_gpu, :]
+                count = count+1
+                loss = loss_fn(net=ddp, images=img_train, labels=lab_train, augment_labels=aug_train,noise = noise_train)
+                
                 training_stats.report('Loss/loss', loss)
                 loss.sum().mul(loss_scaling / batch_gpu_total).backward()
 
