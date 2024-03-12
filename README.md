@@ -38,7 +38,7 @@ torchrun --nproc_per_node=1 --standalone generate.py --network NDEWORK_DIR --see
 |$\rho$ = 7, steps = 18 \(the same as [EDM](https://github.com/NVlabs/edm)\) |```--rho 7 --steps 18 ``` | 35| 1.95 |
 |$\rho$ = 90, steps = 14  |``` --rho 90 --steps 14 ```| 27|**1.88** |
 
-
+|Hyper-parameters| Options | NFE $\downarrow$ | FID $\downarrow$|
 |-|-|-|-|
 |$\rho$ = 7, steps = 18 \(the same as [EDM](https://github.com/NVlabs/edm)\) |```--rho 7 --steps 18 ``` | 35| 1.79 |
 |$\rho$ = 72, steps = 15  |``` --rho 72 --steps 15 ```| 29|**1.73** |
