@@ -8,7 +8,7 @@ Daegyu Kim, Uiwon Hwang, Jooyoung Choi, Chaehun Shin, Sungroh Yoon
 [arXiv](https://arxiv.org/abs/2403.05069)
 
 **Abstract**
-###### *Recent studies have explored the application of Optimal Transport to ODE-based image generative models. These approaches enhance generative models by identifying the Optimal Transport connections between image and noise distributions. However, applying these approaches to diffusion-based generative models introduces computational efficiency issues, making their application challenging. Therefore, simulation-free models, such as Flow Matching, are the only viable option for implementing these approaches. To tackle this limitation, we propose the Approximated Optimal Transport (AOT) for diffusion-based generative models, which effectively estimates the Optimal Transport process. We make two primary contributions. Firstly, we illustrate the viability of obtaining AOT through mini-batch coupling. Secondly, we enhance the training of diffusion models by incorporating AOT, resulting in improved model performance. Notably, our method achieves state-of-the-art results in unconditional image generation on the CIFAR-10 dataset without requiring guidance models, obtaining a FID score of 1.88 with 27 NFE (the number of function evaluations). Additionally, we extend the application of AOT to the training of discriminator guidance models, leading to a new benchmark for unconditional image generation on the CIFAR-10 dataset utilizing guidance models with a remarkable FID score of 1.67 with 29 NFE.*
+###### *We introduce the Approximated Optimal Transport (AOT) technique, a novel training scheme for diffusion-based generative models. Our approach aims to approximate and integrate optimal transport into the training process, significantly enhancing the ability of diffusion models to estimate the denoiser outputs accurately. This improvement leads to ODE trajectories of diffusion models with lower curvature and reduced truncation errors during sampling. We achieve superior image quality and reduced sampling steps by employing AOT in training. Specifically, we achieve FID scores of 1.88 with just 27 NFEs and 1.73 with 29 NFEs in unconditional and conditional generations, respectively. Furthermore, when applying AOT to train the discriminator for guidance, we establish new state-of-the-art FID scores of 1.68 and 1.58 for unconditional and conditional generations, respectively, each with 29 NFEs. This outcome demonstrates the effectiveness of AOT in enhancing the performance of diffusion models.*
 
 This is implementation code of [Improving Diffusion-Based Generative Models via Approximated Optimal Transport]().
 
@@ -24,7 +24,7 @@ conda activate edm
 ```
 # Pre-trained model
 
-You can download our pre-trained model in [this link](https://drive.google.com/file/d/1y-79-IKw15BaCHJRznC8fUKQ9lQR2I_M/view?usp=sharing).
+You can download our pre-trained [unconditoinal](https://drive.google.com/file/d/1y-79-IKw15BaCHJRznC8fUKQ9lQR2I_M/view?usp=sharing) and [conditional](https://drive.google.com/file/d/1KOSnBal7Mf1wVLwOiKgOachxcwfsDmum/view?usp=sharing} models.
 
 To generate images using our model, run [generate.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/generate.py).
 ```.bash
@@ -38,14 +38,19 @@ torchrun --nproc_per_node=1 --standalone generate.py --network NDEWORK_DIR --see
 |$\rho$ = 7, steps = 18 \(the same as [EDM](https://github.com/NVlabs/edm)\) |```--rho 7 --steps 18 ``` | 35| 1.95 |
 |$\rho$ = 90, steps = 14  |``` --rho 90 --steps 14 ```| 27|**1.88** |
 
+
+|-|-|-|-|
+|$\rho$ = 7, steps = 18 \(the same as [EDM](https://github.com/NVlabs/edm)\) |```--rho 7 --steps 18 ``` | 35| 1.79 |
+|$\rho$ = 72, steps = 15  |``` --rho 72 --steps 15 ```| 29|**1.73** |
+
 # Training and Evaluation
 
 You can train EDM-based diffuion models with our AOT using [train.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/train.py).
 
 We edit [loss.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/training/loss.py) and [training_loop.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/training/training_loop.py) for our AOT techniques.
 ```.bash
-torchrun --standalone --nproc_per_node=4 train.py --outdir OUTPUT_DIR  --data DATASET  --cond 0 --arch ncsnpp \
-        --batch-gpu 32 --batch 256  --large_batch 512
+torchrun --standalone --nproc_per_node=4 train.py --outdir OUTPUT_DIR  --data DATASET  --cond COND --arch ncsnpp \
+         --batch 256  --aot 512
 ```
 
 To measure the FID score of sampled images, run [fid.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/fid.py).
