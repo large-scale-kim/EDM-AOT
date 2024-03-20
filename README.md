@@ -1,4 +1,7 @@
 # Improving Diffusion-Based Generative Models via Approximated Optimal Transport \(EDM-AOT\)
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/improving-diffusion-based-generative-models/image-generation-on-cifar-10)](https://paperswithcode.com/sota/image-generation-on-cifar-10?p=improving-diffusion-based-generative-models)
+
 ![Teaser image](https://github.com/large-scale-kim/EDM-AOT/blob/main/docs/tangent_edm.png)
 ![Teaser image](https://github.com/large-scale-kim/EDM-AOT/blob/main/docs/tanget_aot.png)
 
