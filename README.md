@@ -29,7 +29,7 @@ You can download our pre-trained [unconditoinal](https://drive.google.com/file/d
 To generate images using our model, run [generate.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/generate.py).
 ```.bash
 # Hyper-parameter settings of Heun's sampler. rho = 90 and steps = 14.
-torchrun --nproc_per_node=1 --standalone generate.py --network NDEWORK_DIR --seeds 0-49999 --outdir OUTPUT_DIR --subdirs \
+torchrun --nproc_per_node=1 --standalone generate.py --network NETWORK_DIR --seeds 0-49999 --outdir OUTPUT_DIR --subdirs \
      --batch 200  --rho 90 --steps 14
 ```
 
@@ -51,12 +51,12 @@ We edit [loss.py](https://github.com/large-scale-kim/EDM-AOT/blob/main/training/
 
 For uncondtional models, 
 ```.bash
-torchrun --standalone --nproc_per_node=4 train.py --outdir OUTPUT_DIR  --data DATASET  --cond 0 --arch ncsnpp \
+torchrun --standalone --nproc_per_node=4 train.py --outdir OUTPUT_DIR  --data DATASET_DIR  --cond 0 --arch ncsnpp \
          --batch 256  --aot 512
 ```
 For condtional models, 
 ```.bash
-torchrun --standalone --nproc_per_node=4 train.py --outdir OUTPUT_DIR  --data DATASET  --cond 1 --arch ncsnpp \
+torchrun --standalone --nproc_per_node=4 train.py --outdir OUTPUT_DIR  --data DATASET_DIR  --cond 1 --arch ncsnpp \
          --batch 256  --aot 2048
 ```
 
